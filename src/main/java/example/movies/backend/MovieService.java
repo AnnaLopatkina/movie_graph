@@ -54,6 +54,34 @@ public class MovieService {
                 map("part", query.toLowerCase())));
     }
 
+  /*  public Iterable<Map<String,Object>> searchNameOfActors(String query) {
+        if (query==null || query.trim().isEmpty()) return Collections.emptyList();
+        return Iterators.asCollection(cypher.query(
+                "MATCH (person:Person)\n" +
+                        " WHERE toLower(person.name) CONTAINS $part\n" +
+                        " RETURN person",
+                map("part", query.toLowerCase())));
+    }   */
+
+
+    public Iterable<Map<String, Object>> searchName (String query){
+        if (query==null || query.trim().isEmpty()) return Collections.emptyList();
+        return Iterators.asCollection(cypher.query(
+                "MATCH (person:Person {name: $name})-[:ACTED_IN]->(movies) RETURN person,movies",
+                map("name", query)
+        ));
+    }
+
+ /*  public Iterable<Map<String, Object>> actedIn (String query){
+        if (query==null || query.trim().isEmpty()) return Collections.emptyList();
+        return Iterators.asCollection(cypher.query(
+                "MATCH (person:Person {name: $name})-[:ACTED_IN]->(movies) RETURN person,movies",
+                map("name", query)
+        ));
+    }
+
+  */
+
     public Iterable<Map<String, Object>> searchInYear(int query) {
         if (query < 1880) return Collections.emptyList();
         return Iterators.asCollection(cypher.query(

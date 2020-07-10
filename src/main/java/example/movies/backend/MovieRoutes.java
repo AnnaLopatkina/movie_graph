@@ -23,7 +23,9 @@ public class MovieRoutes implements SparkApplication {
     public void init() {
         get("/movie/:title", (req, res) -> gson.toJson(service.findMovie(URLDecoder.decode(req.params("title")))));
         get("/search", (req, res) -> gson.toJson(service.search(req.queryParams("q"))));
+       // get("/searchNameOfActors", (req, res) -> gson.toJson(service.searchNameOfActors(req.queryParams("q"))));
         get("/year", (req, res) -> gson.toJson(service.searchInYear(Integer.parseInt(req.queryParams("y")))));
+        get("/name", (req, res) -> gson.toJson(service.searchName(req.queryParams("n"))));
         get("/graph", (req, res) -> {
             int limit = req.queryParams("limit") != null ? Integer.valueOf(req.queryParams("limit")) : 100;
             return gson.toJson(service.graph(limit));

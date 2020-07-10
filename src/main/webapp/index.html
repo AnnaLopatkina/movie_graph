@@ -94,6 +94,22 @@
                     }, "json");
             return false;
         }
+
+     /*  function searchNameOfActors() {
+            var query=$("#searchNameOfActors").find("input[name=searchNameOfActors]").val();
+            $.get("/searchNameOfActors?q=" + encodeURIComponent(query),
+                function (data) {
+                    var t = $("table#results tbody").empty();
+                    if (!data || data.length == 0) return;
+                    data.forEach(function (row) {
+                        var person = row.person;
+                        $("<tr><td class='person'>" + person.name + "</td><td>" + person.born + "</td><td>"  + "</td></tr>").appendTo(t))
+                    });
+            return false;
+        }
+        $("#search").submit(searchName);
+        searchNameOfActors();*/
+
         function search() {
             var query=$("#search").find("input[name=search]").val();
             $.get("/search?q=" + encodeURIComponent(query),
